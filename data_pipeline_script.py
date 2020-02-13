@@ -18,5 +18,19 @@ white = pd.read_csv("http://archive.ics.uci.edu/ml/machine-learning-databases/wi
 red = pd.read_csv("http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv", sep = ';')
 
 # Peek at the retrieved data
-print(white.info())
+
 print(red.info())
+print(white.info())
+
+# Inpsect data in more detail
+print(red.head())
+print(white.tail())
+print(red.sample(5))
+
+# Look at summary statisitics for each dataset
+print(red.describe())
+print(white.describe())
+
+# Check for null values
+print(red.isnull())
+print(white.isnull())
