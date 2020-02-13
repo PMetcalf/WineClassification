@@ -46,9 +46,17 @@ def plot_sulphates_scatter(red, white):
     ax[1].scatter(white['quality'], white['sulphates'], color = 'white', ec = 'black', lw = 0.5)
 
     # Adjust figure geometry
-
+    ax[0].set_xlim([0, 10])
+    ax[0].set_ylim([0, 2.5])
+    ax[1].set_xlim([0, 10])
+    ax[1].set_ylim([0, 2.5])
 
     # Add labels
+    ax[0].set_xlabel('Quality (Rating) - Red')
+    ax[0].set_ylabel('Sulphates')
+    ax[1].set_xlabel('Quality (Rating) - White')
+
+    fig.suptitle('Sulphates vs. Quality for Red & White Wines')
 
     plt.show()
 
