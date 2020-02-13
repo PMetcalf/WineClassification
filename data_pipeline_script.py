@@ -11,12 +11,13 @@ and then trains a deep neural network model to classify whether a wine is red or
 
 # Module Importations (A - Z)
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 
 # Routine plots histograms of alcohol content for red and white wine
 def plot_alcohol_histogram(red, white):
 
-    # Initialise the figure
+    # Initialise figure
     fig, ax = plt.subplots(1, 2)
 
     # Plot the data as histograms
@@ -38,7 +39,7 @@ def plot_alcohol_histogram(red, white):
 # Routine plots scatter graphs of sulphates and quality for red and white wines
 def plot_sulphates_scatter(red, white):
 
-    # Initialise the figure
+    # Initialise figure
     fig, ax = plt.subplots(1, 2, figsize = (8, 4))
 
     # Plot the data as scatter charts
@@ -60,6 +61,24 @@ def plot_sulphates_scatter(red, white):
 
     plt.show()
 
+# Routine plots scatter graphs of acidic volatility, alcohol and quality for red and white wines
+def plot_volatility_alcohol_quality_scatter(red, white):
+
+    # Create colour legend using random numbers
+    np.random.seed(570)
+    red_colors = np.random.rand(6, 4)
+    white_colors = np.append(red_colors, np.random.rand(1, 4), axis = 0)
+
+    # Identify unique quality values for each wine
+
+
+    # Initialise figure
+
+    # Plot the data as scatter charts
+
+    # Adjust figure geometry
+
+    # Add labels
 
 '''
 Main body of Data Pipeline
@@ -89,5 +108,6 @@ print(red.isnull())
 print(white.isnull())
 
 # Visualise some of the input data
-plot_alcohol_histogram(red, white)
-plot_sulphates_scatter(red, white)
+#plot_alcohol_histogram(red, white)
+#plot_sulphates_scatter(red, white)
+plot_volatility_alcohol_quality_scatter(red, white)
