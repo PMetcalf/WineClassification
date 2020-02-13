@@ -70,15 +70,29 @@ def plot_volatility_alcohol_quality_scatter(red, white):
     white_colors = np.append(red_colors, np.random.rand(1, 4), axis = 0)
 
     # Identify unique quality values for each wine
-
+    red_labels = np.unique(red['quality'])
+    white_labels = np.unique(white['quality'])
 
     # Initialise figure
+    fig, ax = plt.subplots(1, 2, figsize = (8, 4))
 
-    # Plot the data as scatter charts
+    # Plot the data as scatter charts, by iterating over quality values
+
+    for i in range(len(red_colors)):
+        red_y = red['alcohol'][red.quality == red_labels[i]]
+        red_x = red['volatile acidity'][red.quality == red_labels[i]]
+        ax[0].scatter(red_x, red_y, c = red_colors[i])
+
+    for i in range(len(white_colors)):
+        white_y = white['alcohol'][white.quality == white_labels[i]]
+        white_x = white['volatile acidity'][white.quality == white_labels[i]]
+        ax[1].scatter(white_x, white_y, c = white_colors[i])
 
     # Adjust figure geometry
 
     # Add labels
+
+    plt.show()
 
 '''
 Main body of Data Pipeline
