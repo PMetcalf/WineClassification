@@ -24,10 +24,15 @@ def plot_alcohol(red, white):
     ax[1].hist(white.alcohol, 10, facecolor = 'white', ec = 'black', lw = 0.5, alpha = 0.5, label = 'White Wine')
 
     # Make adjustments to the figure
-    fig.subplots_adjust(left = 0, right = 1, bottom = 0, top = 0.5, hspace = 0.05, wspace = 1)
     ax[0].set_ylim([0, 1000])
 
     # Add labels
+    ax[0].set_xlabel('Alcohol: % Vol')
+    ax[0].set_ylabel('Frequency - Red')
+    ax[1].set_xlabel('Alcohol: % Vol')
+    ax[1].set_ylabel('Frequency - White')
+
+    fig.suptitle('Distribution of Alcohol % Vol')
 
     plt.show()
 
