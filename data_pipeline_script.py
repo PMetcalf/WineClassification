@@ -13,17 +13,17 @@ and then trains a deep neural network model to classify whether a wine is red or
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Support routines
-def plot_alcohol(red, white):
+# Routine plots histograms of alcohol content for red and white wine
+def plot_alcohol_histogram(red, white):
 
     # Initialise the figure
     fig, ax = plt.subplots(1, 2)
 
     # Plot the data as histograms
-    ax[0].hist(red.alcohol, 10, facecolor = 'red', alpha = 0.5, label = "Red Wine")
-    ax[1].hist(white.alcohol, 10, facecolor = 'white', ec = 'black', lw = 0.5, alpha = 0.5, label = "White Wine")
+    ax[0].hist(red.alcohol, 10, facecolor = 'red', alpha = 0.5, label = 'Red Wine')
+    ax[1].hist(white.alcohol, 10, facecolor = 'white', ec = 'black', lw = 0.5, alpha = 0.5, label = 'White Wine')
 
-    # Make adjustments to the figure
+    # Adjust figure geometry
     ax[0].set_ylim([0, 1000])
 
     # Add labels
@@ -34,6 +34,24 @@ def plot_alcohol(red, white):
     fig.suptitle('Distribution of Alcohol % Vol')
 
     plt.show()
+
+# Routine plots scatter graphs of sulphates and quality for red and white wines
+def plot_sulphates_scatter(red, white):
+
+    # Initialise the figure
+    fig, ax = plt.subplots(1, 2, figsize = (8, 4))
+
+    # Plot the data as scatter charts
+    ax[0].scatter(red['quality'], red['sulphates'], color = 'red')
+    ax[1].scatter(white['quality'], white['sulphates'], color = 'white', ec = 'black', lw = 0.5)
+
+    # Adjust figure geometry
+
+
+    # Add labels
+
+    plt.show()
+
 
 '''
 Main body of Data Pipeline
@@ -63,4 +81,5 @@ print(red.isnull())
 print(white.isnull())
 
 # Visualise some of the input data
-plot_alcohol(red, white)
+plot_alcohol_histogram(red, white)
+plot_sulphates_scatter(red, white)
