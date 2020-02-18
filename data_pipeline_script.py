@@ -161,3 +161,12 @@ y = np.ravel(wines.type)
 
 # Split the data into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33, random_state = 42)
+
+# Use a library scaler to standardise disparate data points
+scaler = StandardScaler().fit(X_train)
+
+# Scale the training set
+X_train = scaler.transform(X_train)
+
+# Scale the test set
+X_test = scaler.transform(X_test)
