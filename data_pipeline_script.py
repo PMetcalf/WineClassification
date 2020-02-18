@@ -14,6 +14,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split 
 
 # Routine plots histograms of alcohol content for red and white wine
 def plot_alcohol_histogram(red, white):
@@ -149,4 +151,13 @@ wines = red.append(white, ignore_index = True)
 # Create and display correlation matrix
 corr = wines.corr()
 sns.heatmap(corr, xticklabels = corr.columns.values, yticklabels = corr.columns.values)
-plt.show()
+#plt.show()
+
+# Specify the model input data
+X = wines.iloc[:, 0:11]
+
+# Specify and flatten the model output data
+y = np.ravel(wines.type)
+
+# Split the data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33, random_state = 42)
