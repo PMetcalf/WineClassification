@@ -134,7 +134,13 @@ print(white.describe())
 print(red.isnull())
 print(white.isnull())
 
-# Visualise some of the input data
+# Conduct Exploratory Data Analysis on data
 #plot_alcohol_histogram(red, white)
 #plot_sulphates_scatter(red, white)
-plot_volatility_alcohol_quality_scatter(red, white)
+#plot_volatility_alcohol_quality_scatter(red, white)
+
+# Tag & merge the datasets to preprocess
+red['type'] = 1
+white['type'] = 0
+
+wines = red.append(white, ignore_index = True)
