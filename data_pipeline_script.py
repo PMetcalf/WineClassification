@@ -196,3 +196,7 @@ print(model.summary())
 print(model.get_config())
 print(model.get_weights())
 
+# Compile and fit the model
+model.compile(loss = 'binary_crossentropy', optimizer = 'Adam', metrics = ['accuracy'])
+
+model.fit(X_train, y_train, epochs = 20, batch_size = 1, verbose = 1)
