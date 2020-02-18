@@ -189,3 +189,10 @@ model.add(Dense(8, activation = 'relu'))
 
 # Add the output layer
 model.add(Dense(1, activation = 'sigmoid'))
+
+# View data about intialised NN model
+print(model.output_shape)
+print(model.summary())
+print(model.get_config())
+print(model.get_weights())
+
