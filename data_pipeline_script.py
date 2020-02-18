@@ -200,3 +200,6 @@ print(model.get_weights())
 model.compile(loss = 'binary_crossentropy', optimizer = 'Adam', metrics = ['accuracy'])
 
 model.fit(X_train, y_train, epochs = 20, batch_size = 1, verbose = 1)
+
+# Make some initial predictions with the model
+y_pred = model.predict(X_test)
