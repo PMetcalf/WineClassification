@@ -13,6 +13,7 @@ and then trains a deep neural network model to classify whether a wine is red or
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import seaborn as sns
 
 # Routine plots histograms of alcohol content for red and white wine
 def plot_alcohol_histogram(red, white):
@@ -139,8 +140,13 @@ print(white.isnull())
 #plot_sulphates_scatter(red, white)
 #plot_volatility_alcohol_quality_scatter(red, white)
 
-# Tag & merge the datasets to preprocess
+# Tag and merge the datasets to preprocess
 red['type'] = 1
 white['type'] = 0
 
 wines = red.append(white, ignore_index = True)
+
+# Create and display correlation matrix
+corr = wines.corr()
+sns.heatmap(corr, xticklabels = corr.columns.values, yticklabels = corr.columns.values)
+plt.show()
