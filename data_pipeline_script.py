@@ -13,6 +13,7 @@ It uses TensorFlow via the Keras API.
 '''
 
 # Module Importations (A - Z)
+import keras as krs
 from keras.layers import Dense
 from keras.models import Sequential
 import matplotlib.pyplot as plt
@@ -178,6 +179,9 @@ X_test = scaler.transform(X_test)
 
 # Build the architecture of the model
 
+# Clear any existing models
+krs.backend.clear_session()
+
 # Initialise the model
 model = Sequential()
 
@@ -199,7 +203,11 @@ print(model.get_weights())
 # Compile and fit the model
 model.compile(loss = 'binary_crossentropy', optimizer = 'Adam', metrics = ['accuracy'])
 
-model.fit(X_train, y_train, epochs = 20, batch_size = 1, verbose = 1)
+model.fit(X_train, y_train, epochs = 5, batch_size = 1, verbose = 1)
 
 # Make some initial predictions with the model
 y_pred = model.predict(X_test)
+
+# Evaluate the performance of the model
+score = model.evaluate(X_test, y_test, verbose = 1)
+print(score)
