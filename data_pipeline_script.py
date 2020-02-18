@@ -6,10 +6,15 @@ This script loads wine data from the UCI Machine Learning repository,
 performs data visualisation and preprocessing operations, 
 and then trains a deep neural network model to classify whether a wine is red or white.
 
+The neural network used is a multi-layer perceptron, using the relu function for activation. 
+It uses TensorFlow via the Keras API.
+
 
 '''
 
 # Module Importations (A - Z)
+from keras.layers import Dense
+from keras.models import Sequential
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -170,3 +175,17 @@ X_train = scaler.transform(X_train)
 
 # Scale the test set
 X_test = scaler.transform(X_test)
+
+# Build the architecture of the model
+
+# Initialise the model
+model = Sequential()
+
+# Add the input layer
+model.add(Dense(12, activation = 'relu', input_shape = (11,)))
+
+# Add one hidden layer
+model.add(Dense(8, activation = 'relu'))
+
+# Add the output layer
+model.add(Dense(1, activation = 'sigmoid'))
