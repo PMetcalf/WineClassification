@@ -66,8 +66,8 @@ def plot_volatility_alcohol_quality_scatter(red, white):
 
     # Create colour legend using random numbers
     np.random.seed(570)
-    red_colors = np.random.rand(6, 4)
-    white_colors = np.append(red_colors, np.random.rand(1, 4), axis = 0)
+    red_colors = np.random.rand(6, 4)   # Array is shaped based on red.quality length
+    white_colors = np.append(red_colors, np.random.rand(1, 4), axis = 0)    # Array is shaped based on white.quality length
 
     # Identify unique quality values for each wine
     red_labels = np.unique(red['quality'])
@@ -89,8 +89,21 @@ def plot_volatility_alcohol_quality_scatter(red, white):
         ax[1].scatter(white_x, white_y, c = white_colors[i])
 
     # Adjust figure geometry
+    ax[0].set_xlim([0, 1.7])
+    ax[0].set_ylim([5, 15.5])
+    ax[1].set_xlim([0, 1.7])
+    ax[1].set_ylim([5, 15.5])
 
     # Add labels
+    ax[0].set_title('Red Wine')
+    ax[1].set_title('White Wine')
+    ax[0].set_xlabel('Volatile Acidity')
+    ax[0].set_ylabel('Sulphates')
+    ax[1].set_xlabel('Volatile Acidity')
+
+    # Add legend
+    ax[0].legend(red_labels, loc = 'best', bbox_to_anchor = (1, 1))
+    ax[1].legend(white_labels, loc = 'best', bbox_to_anchor = (1, 1))
 
     plt.show()
 
