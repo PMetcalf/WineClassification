@@ -20,8 +20,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, cohen_kappa_score
 from sklearn.model_selection import train_test_split 
+from sklearn.preprocessing import StandardScaler
 
 # Routine plots histograms of alcohol content for red and white wine
 def plot_alcohol_histogram(red, white):
@@ -164,6 +165,7 @@ X = wines.iloc[:, 0:11]
 
 # Specify and flatten the model output data
 y = np.ravel(wines.type)
+print(y)
 
 # Split the data into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33, random_state = 42)
@@ -195,19 +197,42 @@ model.add(Dense(8, activation = 'relu'))
 model.add(Dense(1, activation = 'sigmoid'))
 
 # View data about intialised NN model
-print(model.output_shape)
-print(model.summary())
-print(model.get_config())
-print(model.get_weights())
+#print(model.output_shape)
+#print(model.summary())
+#print(model.get_config())
+#print(model.get_weights())
 
 # Compile and fit the model
-model.compile(loss = 'binary_crossentropy', optimizer = 'Adam', metrics = ['accuracy'])
+model.compile(loss = 'binary_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
 
 model.fit(X_train, y_train, epochs = 5, batch_size = 1, verbose = 1)
 
 # Make some initial predictions with the model
 y_pred = model.predict(X_test)
+y_pred = [np.round(x) for x in y_pred]
+print(y_test[:5])
+print(y_pred[:5])
 
 # Evaluate the performance of the model
 score = model.evaluate(X_test, y_test, verbose = 1)
-print(score)
+print("Score: " + str(score))
+
+# Confusion matrix
+confusion_matrix(y_test, y_pred)
+print("Confusion: " + str(confusion_matrix))
+
+# Model Precision
+precision_score(y_test, y_pred)
+print("Precision: " + str(precision_score))
+
+# Model Recall
+recall_score(y_test, y_pred)
+print("Recall: " + str(recall_score))
+
+# Model F1 Score
+f1_score(y_test, y_pred)
+print("f1: " + str(f1_score))
+
+# Model Cohen's Kappa
+cohen_kappa_score(y_test, y_pred)
+print("cohen kappa: " + str(cohen_kappa_score))
