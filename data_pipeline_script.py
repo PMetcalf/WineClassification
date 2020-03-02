@@ -218,21 +218,21 @@ score = model.evaluate(X_test, y_test, verbose = 1)
 print("Score: " + str(score))
 
 # Confusion matrix
-confusion_matrix(y_test, y_pred)
-print("Confusion: " + str(confusion_matrix))
+print("Confusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
 
 # Model Precision
-precision_score(y_test, y_pred)
-print("Precision: " + str(precision_score))
+print("Precision:")
+print(precision_score(y_test, y_pred))
 
 # Model Recall
-recall_score(y_test, y_pred)
-print("Recall: " + str(recall_score))
+print("Recall:")
+print(recall_score(y_test, y_pred))
 
 # Model F1 Score
-f1_score(y_test, y_pred)
-print("f1: " + str(f1_score))
+print("F1:")
+print(f1_score(y_test, y_pred))
 
 # Model Cohen's Kappa
-cohen_kappa_score(y_test, y_pred)
-print("cohen kappa: " + str(cohen_kappa_score))
+print("Cohen Kappa:")
+print(cohen_kappa_score(y_test, y_pred))
