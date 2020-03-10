@@ -304,3 +304,17 @@ print(mae_value)
 model_r2_score = r2_score(y[test], y_pred)
 print("Regression Model R2 Score:")
 print(model_r2_score)
+
+'''
+Fine-tune the Regression Model to Predict Wine Quality
+'''
+
+# Add layers to model
+
+# Add hidden units to model
+
+# Change learning rate of RMSProp optimiser
+
+# Change optimiser to SGD
+
+# Evaluate performance of different models
