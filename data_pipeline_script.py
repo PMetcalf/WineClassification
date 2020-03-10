@@ -245,7 +245,7 @@ print(cohen_kappa_score(y_test, y_pred))
 '''
 
 '''
-Create an Initial Regression Model to Predict Wine Quality
+Create an Initial Regression Model to Predict Wine Quality (Model 0)
 '''
 
 # Isolate target labels
@@ -268,53 +268,55 @@ krs.backend.clear_session()
 seed = 7
 np.random.seed(seed)
 
+epoch_number = 5
+
 # Initialise the kfold cross-validation object
 kfold = StratifiedKFold(n_splits = 5, shuffle = True, random_state = seed)
 
 # For each kfold, initialise, compile and train the model
 for train, test in kfold.split(X, y):
     # Initialise the model
-    model = Sequential()
+    model0 = Sequential()
 
     # Add the input layer
-    model.add(Dense(64, input_dim = 12, activation = 'relu'))
+    model0.add(Dense(64, input_dim = 12, activation = 'relu'))
 
     # Add the output layer
-    model.add(Dense(1))
+    model0.add(Dense(1))
 
     # Compile the model
-    model.compile(optimizer = 'rmsprop', loss = 'mse', metrics = ['mae'])
+    model0.compile(optimizer = 'rmsprop', loss = 'mse', metrics = ['mae'])
 
     # Fit the model to the data
-    model.fit(X[train], y[train], epochs = 10, verbose = 1)
+    model0.fit(X[train], y[train], epochs = epoch_number, verbose = 1)
 
 # Make predictions for model evaluation
-y_pred = model.predict(X[test])
+y_pred = model0.predict(X[test])
 
 # Evaluate the model for mean squared error (mse) and mean absolute error (mae)
-mse_value, mae_value = model.evaluate(X[test], y[test], verbose = 0)
+model0_mse_value, model0_mae_value = model0.evaluate(X[test], y[test], verbose = 0)
 
-print("Regression Model Mean Squared Error:")
-print(mse_value)
+print("Model 0 Mean Squared Error:")
+print(model0_mse_value)
 
-print("Regression Model Mean Absolute Error:")
-print(mae_value)
+print("Model 0 Mean Absolute Error:")
+print(model0_mae_value)
 
 # Model performance evaluated using r2.
-model_r2_score = r2_score(y[test], y_pred)
-print("Regression Model R2 Score:")
-print(model_r2_score)
+model0_r2_score = r2_score(y[test], y_pred)
+print("Model 0 R2 Score:")
+print(model0_r2_score)
 
 '''
 Fine-tune the Regression Model to Predict Wine Quality
 '''
 
-# Add layers to model
+# Add layers to model (model 1)
 
-# Add hidden units to model
+# Add hidden units to model (model 2)
 
-# Change learning rate of RMSProp optimiser
+# Change learning rate of RMSProp optimiser (model 3)
 
-# Change optimiser to SGD
+# Change optimiser to SGD (model 4)
 
 # Evaluate performance of different models
