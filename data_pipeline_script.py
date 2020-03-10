@@ -21,6 +21,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, cohen_kappa_score
+from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import train_test_split 
 from sklearn.preprocessing import StandardScaler
 
@@ -263,11 +264,26 @@ X = StandardScaler().fit_transform(X)
 # Clear any existing models
 krs.backend.clear_session()
 
-# Initialise the model.
-model = Sequential()
+# Create a value for the random state
+seed = 7
+np.random.seed(seed)
 
-# Add the input layer.
-model.add(Dense(64, input_dim = 12, activation = 'relu'))
+# Initialise the kfold cross-validation object
+kfold = StratifiedKFold(n_splits = 5, shuffle = True, random_state = seed)
 
-# Add the output layer.
-model.add(Dense(1))
+# For each kfold, initialise, compile and train the model
+for train, test in kfold.split(X, y):
+    # Initialise the model
+    model = Sequential()
+
+    # Add the input layer
+    model.add(Dense(64, input_dim = 12, activation = 'relu'))
+
+    # Add the output layer
+    model.add(Dense(1))
+
+    # Compile the model
+    model.compile(optimizer = 'rmsprop', loss = 'mse', metrics = ['mae'])
+
+    # Fit the model to the data
+    model.fit(X[train], y[train], epochs = 2, verbose = 1)
