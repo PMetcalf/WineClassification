@@ -254,3 +254,6 @@ print(y)
 # Isolate data
 X = wines.drop('quality', axis = 1)
 print(X)
+
+# Re-apply data scaling to the isolated data.
+X = StandardScaler().fit_transform(X)
