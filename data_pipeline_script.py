@@ -257,3 +257,17 @@ print(X)
 
 # Re-apply data scaling to the isolated data.
 X = StandardScaler().fit_transform(X)
+
+# Build a regression neural network model.
+
+# Clear any existing models
+krs.backend.clear_session()
+
+# Initialise the model.
+model = Sequential()
+
+# Add the input layer.
+model.add(Dense(64, input_dim = 12, activation = 'relu'))
+
+# Add the output layer.
+model.add(Dense(1))
