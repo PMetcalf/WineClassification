@@ -264,11 +264,11 @@ X = StandardScaler().fit_transform(X)
 # Clear any existing models
 krs.backend.clear_session()
 
-# Create a value for the random state
+# Create random state and epoch values
 seed = 7
 np.random.seed(seed)
 
-epoch_number = 5
+epoch_number = 2
 
 # Initialise the kfold cross-validation object
 kfold = StratifiedKFold(n_splits = 5, shuffle = True, random_state = seed)
@@ -288,7 +288,7 @@ for train, test in kfold.split(X, y):
     model0.compile(optimizer = 'rmsprop', loss = 'mse', metrics = ['mae'])
 
     # Fit the model to the data
-    model0.fit(X[train], y[train], epochs = epoch_number, verbose = 1)
+    model0.fit(X[train], y[train], epochs = epoch_number, verbose = 0)
 
 # Make predictions for model evaluation
 y_pred = model0.predict(X[test])
@@ -309,14 +309,67 @@ print(model0_r2_score)
 
 '''
 Fine-tune the Regression Model to Predict Wine Quality
+
+Add layers to model (model 1)
 '''
 
-# Add layers to model (model 1)
+# Clear any existing models
+krs.backend.clear_session()
 
-# Add hidden units to model (model 2)
+# Initialise the kfold cross-validation object
+kfold = StratifiedKFold(n_splits = 5, shuffle = True, random_state = seed)
 
-# Change learning rate of RMSProp optimiser (model 3)
+# For each kfold, initialise, compile and train the model
+for train, test in kfold.split(X, y):
+    # Initialise the model
+    model1 = Sequential()
 
-# Change optimiser to SGD (model 4)
+    # Add model layers
+    model1.add(Dense(64, input_dim = 12, activation = 'relu'))
+    model1.add(Dense(64, activation = 'relu'))
+    model1.add(Dense(1))
 
-# Evaluate performance of different models
+    # Compile the model
+    model1.compile(optimizer = 'rmsprop', loss = 'mse', metrics = ['mae'])
+
+    # Fit the model to the data
+    model1.fit(X[train], y[train], epochs = epoch_number, verbose = 0)
+
+# Make predictions for model evaluation
+y_pred = model1.predict(X[test])
+
+# Evaluate the model for mean squared error (mse) and mean absolute error (mae)
+model1_mse_value, model1_mae_value = model1.evaluate(X[test], y[test], verbose = 0)
+
+print("Model 1 Mean Squared Error:")
+print(model1_mse_value)
+
+print("Model 1 Mean Absolute Error:")
+print(model1_mae_value)
+
+# Model performance evaluated using r2.
+model1_r2_score = r2_score(y[test], y_pred)
+print("Model 1 R2 Score:")
+print(model1_r2_score)
+
+'''
+Add hidden units to model (model 2)
+'''
+
+
+
+'''
+Change learning rate of RMSProp optimiser (model 3)
+'''
+
+
+
+'''
+Change optimiser to SGD (model 4)
+'''
+
+
+
+'''
+Evaluate performance of different models
+'''
