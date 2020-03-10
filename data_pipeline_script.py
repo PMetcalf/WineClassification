@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, cohen_kappa_score
+from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, cohen_kappa_score, r2_score
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import train_test_split 
 from sklearn.preprocessing import StandardScaler
@@ -286,7 +286,10 @@ for train, test in kfold.split(X, y):
     model.compile(optimizer = 'rmsprop', loss = 'mse', metrics = ['mae'])
 
     # Fit the model to the data
-    model.fit(X[train], y[train], epochs = 2, verbose = 1)
+    model.fit(X[train], y[train], epochs = 10, verbose = 1)
+
+# Make predictions for model evaluation
+y_pred = model.predict(X[test])
 
 # Evaluate the model for mean squared error (mse) and mean absolute error (mae)
 mse_value, mae_value = model.evaluate(X[test], y[test], verbose = 0)
@@ -296,3 +299,8 @@ print(mse_value)
 
 print("Regression Model Mean Absolute Error:")
 print(mae_value)
+
+# Model performance evaluated using r2.
+model_r2_score = r2_score(y[test], y_pred)
+print("Regression Model R2 Score:")
+print(model_r2_score)
