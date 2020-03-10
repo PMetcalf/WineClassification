@@ -149,6 +149,10 @@ print(white.isnull())
 #plot_sulphates_scatter(red, white)
 #plot_volatility_alcohol_quality_scatter(red, white)
 
+'''
+Create a Model to Predict Wine Type
+'''
+
 # Tag and merge the datasets to preprocess
 red['type'] = 1
 white['type'] = 0
@@ -236,3 +240,7 @@ print(f1_score(y_test, y_pred))
 # Model Cohen's Kappa
 print("Cohen Kappa:")
 print(cohen_kappa_score(y_test, y_pred))
+
+'''
+Create a Model to Predict Wine Quality
+'''
