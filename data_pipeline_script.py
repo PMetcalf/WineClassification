@@ -245,7 +245,7 @@ print(cohen_kappa_score(y_test, y_pred))
 '''
 
 '''
-Create a Model to Predict Wine Quality
+Create an Initial Regression Model to Predict Wine Quality
 '''
 
 # Isolate target labels
@@ -287,3 +287,12 @@ for train, test in kfold.split(X, y):
 
     # Fit the model to the data
     model.fit(X[train], y[train], epochs = 2, verbose = 1)
+
+# Evaluate the model for mean squared error (mse) and mean absolute error (mae)
+mse_value, mae_value = model.evaluate(X[test], y[test], verbose = 0)
+
+print("Regression Model Mean Squared Error:")
+print(mse_value)
+
+print("Regression Model Mean Absolute Error:")
+print(mae_value)
