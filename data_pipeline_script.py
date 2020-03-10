@@ -171,6 +171,7 @@ X = wines.iloc[:, 0:11]
 y = np.ravel(wines.type)
 print(y)
 
+'''
 # Split the data into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33, random_state = 42)
 
@@ -240,7 +241,16 @@ print(f1_score(y_test, y_pred))
 # Model Cohen's Kappa
 print("Cohen Kappa:")
 print(cohen_kappa_score(y_test, y_pred))
+'''
 
 '''
 Create a Model to Predict Wine Quality
 '''
+
+# Isolate target labels
+y = wines.quality
+print(y)
+
+# Isolate data
+X = wines.drop('quality', axis = 1)
+print(X)
